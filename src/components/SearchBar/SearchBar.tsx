@@ -6,7 +6,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ findImage, cleanGallery, resetPag
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>): void | string {
     evt.preventDefault();
     cleanGallery();
-    const userInput = evt.currentTarget.elements.imageName.value.trim();
+    const userInputElement= evt.currentTarget.elements.namedItem('imageName') as HTMLInputElement;
+    const userInput: string = userInputElement?.value.trim();
     if (userInput === "")
       return toast.error(<div>Enter text to search for an image</div>);
     else {

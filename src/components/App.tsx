@@ -8,7 +8,7 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./ImageModal/ImageModal";
 import WarningWindow from "./WarningWindow/WarningWindow";
-import { GalleryItem, ImageModalItem } from "./App.types";
+import { GalleryItem, ImageModalItem, ImagesData } from "./App.types";
 
 function App() {
   const [imageName, setImageName] = useState<string>("");
@@ -34,9 +34,9 @@ function App() {
       try {
         setError(false);
         setLoader(true);
-        const images = await getGalleryByQuery(imageName, page);
-        console.log(images);
-        setGallery((prevGallery: object | null) => {
+        const images: ImagesData = await getGalleryByQuery(imageName, page);
+        console.log(images.data.results);
+        setGallery((prevGallery: GalleryItem[] | null) => {
           if (prevGallery === null) return [...images.data.results];
           else return [...prevGallery, ...images.data.results];
         });
@@ -49,7 +49,7 @@ function App() {
     fetchGallery();
   }, [imageName, page]);
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
 
   function openModal(): void {
     setIsOpen(true);
@@ -59,7 +59,7 @@ function App() {
     setIsOpen(false);
   }
 
-  function selectedImage(image: ImageModalItem): void {
+  function selectedImage(image: object): void {
     setModalImage(image);
     openModal();
   }
@@ -81,7 +81,6 @@ function App() {
         {loader && <Loader />}
         {error && <ErrorMessage />}
         {gallery && <LoadMoreBtn loadMoreCounter={loadMoreCounter} />}
-        {/* <ImageModal modalImage={modalImage} /> */}
         <WarningWindow />
         {modalIsOpen && (
           <ImageModal

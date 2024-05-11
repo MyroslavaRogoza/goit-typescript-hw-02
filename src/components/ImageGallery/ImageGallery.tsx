@@ -1,7 +1,10 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
+import { ImageGalleryProps } from "../App.types";
 
-const ImageGallery: React.FC  = ({ gallery, selectedImage}) => {
+
+
+const ImageGallery: React.FC<ImageGalleryProps> = ({ gallery, selectedImage}) => {
   console.log(gallery);
   return (
     <ul className={css.imageGallery}>
