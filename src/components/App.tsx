@@ -16,7 +16,7 @@ function App() {
   const [error, setError] = useState<boolean>(false);
   const [gallery, setGallery] = useState<GalleryItem[] | null>(null);
   const [page, setPage] = useState<number>(1);
-  const [modalImage, setModalImage] = useState<ImageModalItem | object>({});
+  const [modalImage, setModalImage] = useState<ImageModalItem>({} as ImageModalItem);
 
   function loadMoreCounter(): void {
     setPage(page + 1);
@@ -59,7 +59,7 @@ function App() {
     setIsOpen(false);
   }
 
-  function selectedImage(image: object): void {
+  function selectedImage(image: ImageModalItem): void {
     setModalImage(image);
     openModal();
   }

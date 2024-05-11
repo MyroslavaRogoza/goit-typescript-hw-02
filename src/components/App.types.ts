@@ -35,11 +35,11 @@ export interface ImageModalItem {
   author: string;
 }
 export interface ImageGalleryProps {
-  gallery: GalleryItem[] | null;
+  gallery: GalleryItem[];
   selectedImage: (image: ImageModalItem) => void;
 }
 
-export  interface ImageCardProps {
+export interface ImageCardProps {
   cardPhoto: string;
   altDesc: string;
   selectedImage: (image: ImageModalItem) => void;
@@ -47,7 +47,7 @@ export  interface ImageCardProps {
 }
 
 export interface ImageModalProps {
-  modalImage: ImageModalItem | object;
-  closeModal: () => void; 
+  modalImage: ImageModalItem;
+  closeModal: () => void;
   modalIsOpen: boolean;
 }

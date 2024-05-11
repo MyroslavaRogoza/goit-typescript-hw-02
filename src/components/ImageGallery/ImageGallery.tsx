@@ -2,10 +2,10 @@ import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 import { ImageGalleryProps } from "../App.types";
 
-
-
-const ImageGallery: React.FC<ImageGalleryProps> = ({ gallery, selectedImage}) => {
-  console.log(gallery);
+const ImageGallery: React.FC<ImageGalleryProps> = ({
+  gallery,
+  selectedImage,
+}) => {
   return (
     <ul className={css.imageGallery}>
       {Array.isArray(gallery) &&
@@ -14,8 +14,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ gallery, selectedImage}) =>
             <li key={item.id} className={css.imageItem}>
               <ImageCard
                 cardPhoto={item.urls.small}
+                altDesc={item.alt_description}
                 item={item}
-                selectedImage={selectedImage}              
+                selectedImage={selectedImage}
               />
             </li>
           );
