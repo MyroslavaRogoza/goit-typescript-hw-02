@@ -1,5 +1,6 @@
+import { ImageCardProps } from "../App.types";
 import css from "./ImageCard.module.css";
-const ImageCard = ({ cardPhoto, altDesc, selectedImage, item }) => {
+const ImageCard: React.FC<ImageCardProps> = ({ cardPhoto, altDesc, selectedImage, item }) => {
   return (
     <div className={css.imgContainer}>
       <img

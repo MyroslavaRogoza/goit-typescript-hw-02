@@ -8,26 +8,27 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./ImageModal/ImageModal";
 import WarningWindow from "./WarningWindow/WarningWindow";
+import { GalleryItem, ImageModalItem } from "./App.types";
 
 function App() {
-  const [imageName, setImageName] = useState("");
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
-  const [gallery, setGallery] = useState(null);
-  const [page, setPage] = useState(1);
-  const [modalImage, setModalImage] = useState({});
+  const [imageName, setImageName] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [gallery, setGallery] = useState<GalleryItem[] | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [modalImage, setModalImage] = useState<ImageModalItem | object>({});
 
-  function loadMoreCounter() {
+  function loadMoreCounter(): void {
     setPage(page + 1);
   }
 
-  function findImage(image) {
+  function findImage(image: string): void {
     setImageName(image);
   }
-  function resetPage() {
+  function resetPage(): void {
     setPage(1);
   }
-  useEffect(() => {
+  useEffect((): void | (() => void) => {
     if (imageName.length === 0) return;
     async function fetchGallery() {
       try {
@@ -35,7 +36,7 @@ function App() {
         setLoader(true);
         const images = await getGalleryByQuery(imageName, page);
         console.log(images);
-        setGallery((prevGallery) => {
+        setGallery((prevGallery: object | null) => {
           if (prevGallery === null) return [...images.data.results];
           else return [...prevGallery, ...images.data.results];
         });
@@ -50,20 +51,20 @@ function App() {
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  function openModal() {
+  function openModal(): void {
     setIsOpen(true);
   }
 
-  function closeModal() {
+  function closeModal(): void {
     setIsOpen(false);
   }
 
-  function selectedImage(image) {
+  function selectedImage(image: ImageModalItem): void {
     setModalImage(image);
     openModal();
   }
 
-  function cleanGallery() {
+  function cleanGallery(): void {
     setGallery(null);
   }
   return (
@@ -80,7 +81,7 @@ function App() {
         {loader && <Loader />}
         {error && <ErrorMessage />}
         {gallery && <LoadMoreBtn loadMoreCounter={loadMoreCounter} />}
-        <ImageModal modalImage={modalImage} />
+        {/* <ImageModal modalImage={modalImage} /> */}
         <WarningWindow />
         {modalIsOpen && (
           <ImageModal

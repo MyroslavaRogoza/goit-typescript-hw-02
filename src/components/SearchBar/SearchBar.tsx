@@ -1,8 +1,9 @@
+import { SearchBarProps } from "../App.types";
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 
-const SearchBar = ({ findImage, cleanGallery, resetPage }) => {
-  function handleSubmit(evt) {
+const SearchBar: React.FC<SearchBarProps> = ({ findImage, cleanGallery, resetPage }) => {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>): void | string {
     evt.preventDefault();
     cleanGallery();
     const userInput = evt.currentTarget.elements.imageName.value.trim();

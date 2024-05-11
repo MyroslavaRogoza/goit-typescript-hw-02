@@ -1,7 +1,8 @@
 import css from "./ImageGallery.module.css";
 import ImageCard from "../ImageCard/ImageCard";
 
-const ImageGallery = ({ gallery, selectedImage}) => {
+const ImageGallery: React.FC  = ({ gallery, selectedImage}) => {
+  console.log(gallery);
   return (
     <ul className={css.imageGallery}>
       {Array.isArray(gallery) &&
